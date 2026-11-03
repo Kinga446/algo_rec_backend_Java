@@ -38,8 +38,11 @@ public class Main {
      * Jak odpalisz serwer, to sam przetestuje te metode i wypluje wynik w konsoli.
      */
     static boolean isValidTitle(String title) {
-        // TODO (Czesc 1): na razie ta metoda przepuszcza wszystko jak dziurawy firewall.
-        return true;
+        title = title.trim();
+        if (title.isEmpty()){
+            return false;
+        }
+        return title.length() <= MAX_TITLE_LENGTH;
     }
 
     // ========================================================================
