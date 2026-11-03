@@ -76,8 +76,7 @@ public class Main {
      *   [{"id": 1, "title": "Kupic mleko"}, {"id": 2, "title": "Nauczyc sie Gita"}]
      */
     static Response listTasks(Map<String, Object> body, Map<String, String> params) {
-        // TODO (Czesc 2)
-        return new Response(501, Json.obj("error", "Not implemented"));
+        return new Response(200, tasks);
     }
 
     /**
@@ -91,8 +90,16 @@ public class Main {
      * albo to nie jest String.
      */
     static Response createTask(Map<String, Object> body, Map<String, String> params) {
-        // TODO (Czesc 2)
-        return new Response(501, Json.obj("error", "Not implemented"));
+        String title = Json.getString(body,"title");
+
+        if (!isValidTitle(title)){
+            return new Response(400, Json.obj("error", "Invalid title"));
+        }
+        Map<String, Object> task = Json.obj("id", nextId++, "title", title);
+        tasks.add(task);
+
+
+        return new Response(201, task);
     }
 
     // ========================================================================
