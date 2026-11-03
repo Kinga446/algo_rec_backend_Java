@@ -106,6 +106,21 @@ public class Main {
     //  Lista endpointow: (metoda, sciezka, metoda obslugujaca)
     // ========================================================================
 
+    static Response getTask(Map<String, Object> body, Map<String, String> params) {
+        Long id = Long.parseLong(params.get("id"));
+
+        for(Map<String, Object> task: tasks){
+            if (((Number) task.get("id")).longValue() == id){
+                return new Response(200, task);
+            }
+        }
+
+
+        return new Response(404, Json.obj("error", "Invalid id"));
+    }
+
+
+
     static final List<Route> ROUTES = List.of(
             new Route("GET", "/health", Main::health),
             new Route("GET", "/tasks", Main::listTasks),
